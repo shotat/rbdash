@@ -8,7 +8,8 @@ module Rbdash
     # debug_output $stdout
 
     def initialize
-      config = YAML.load_file('./config.yml')
+      conf_file = './.rbdash.yml'
+      config = YAML.load_file(conf_file)
       self.class.base_uri(config['base_uri'])
       @default_options = {
         verify: false,

@@ -1,7 +1,7 @@
 
 # Rbdash
 
-Rbdash is a configuration management CLI tool for re:dash.
+Rbdash is a configuration management CLI tool for [Redash](https://redash.io/).
 
 NOTE: work in progress. :construction_worker:
 
