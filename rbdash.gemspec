@@ -9,7 +9,6 @@ Gem::Specification.new do |spec|
   spec.version       = Rbdash::VERSION
   spec.authors       = ['shotat']
   spec.email         = ['shotat@users.noreply.github.com']
-
   spec.summary       = 'Configuration management tools for re:dash'
   spec.description   = 'Configuration management tools for re:dash'
   spec.homepage      = 'https://github.com/shotat/rbdash'
@@ -21,10 +20,11 @@ Gem::Specification.new do |spec|
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ['lib']
 
+  spec.add_dependency 'diffy'
   spec.add_dependency 'httparty'
   spec.add_dependency 'thor'
-  spec.add_dependency 'diffy'
   spec.add_development_dependency 'bundler', '~> 1.15'
   spec.add_development_dependency 'rake', '~> 10.0'
   spec.add_development_dependency 'rspec', '~> 3.0'
+  spec.add_development_dependency 'rubocop'
 end
