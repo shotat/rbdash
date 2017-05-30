@@ -12,7 +12,7 @@ module Rbdash
       self.class.base_uri(config['base_uri'])
       @default_options = {
         verify: false,
-        headers: {'Authorization'=> config['token'] }
+        headers: { 'Authorization' => config['token'] }
       }
     end
 

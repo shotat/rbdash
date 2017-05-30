@@ -6,8 +6,7 @@ require_relative 'request'
 
 module Rbdash
   class Client
-    def initialize
-    end
+    def initialize; end
 
     def queries
       response = Query.find_all
