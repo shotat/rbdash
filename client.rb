@@ -24,7 +24,3 @@ module Redash
     end
   end
 end
-
-client = Redash::Client.new
-# client.queries
-client.update_query(28)
