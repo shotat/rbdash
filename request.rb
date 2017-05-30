@@ -3,7 +3,7 @@ require 'httparty'
 require 'json'
 require_relative 'query'
 
-module Redash
+module Rbdash
   class Request
     include HTTParty
 

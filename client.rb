@@ -4,7 +4,7 @@ require 'json'
 require_relative 'query'
 require_relative 'request'
 
-module Redash
+module Rbdash
   class Client
     def initialize
     end

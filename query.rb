@@ -1,6 +1,6 @@
 require_relative 'request'
 
-module Redash
+module Rbdash
   class Query
     DIRNAME = 'queries'.freeze
 
@@ -16,7 +16,7 @@ module Redash
     end
 
     def self.find_all
-      response = Redash::Request.new.get('/api/queries')
+      response = Rbdash::Request.new.get('/api/queries')
       if response.code != 200
         puts "something went wrong."
         return
@@ -26,7 +26,7 @@ module Redash
 
     def self.update(id)
       request_body = self.load(id).to_h
-      response = Redash::Request.new.post("/api/queries/#{id}", request_body)
+      response = Rbdash::Request.new.post("/api/queries/#{id}", request_body)
       if response.code != 200
         puts "something went wrong."
         puts response.code
