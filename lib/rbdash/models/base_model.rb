@@ -41,17 +41,26 @@ module Rbdash
         end
 
         def find_all
-          response = client.get(endpoint.to_s)
-          if response.code != 200
-            puts response.code
-            raise StandardError, 'abort!'
+          all_results = []
+          (1..100).each do |current_page|
+            response = client.get(endpoint.to_s, params: { page: current_page })
+            if response.code != 200
+              puts response.code
+              raise StandardError, 'abort!'
+            end
+            h = JSON.parse(response.body)
+            results = h['results']
+            all_results += results.map do |result|
+              body = result.select { |k, _| attributes.map(&:to_s).include?(k) }
+              new(body)
+            end
+
+            count = h['count']
+            page = h['page']
+            page_size = h['page_size']
+            break if count <= page * page_size
           end
-          h = JSON.parse(response.body)
-          results = h['results']
-          results.map do |result|
-            body = result.select { |k, _| attributes.map(&:to_s).include?(k) }
-            new(body)
-          end
+          all_results
         end
 
         def update(id)
