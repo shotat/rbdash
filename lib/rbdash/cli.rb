@@ -16,7 +16,7 @@ module Rbdash
     end
 
     desc 'push <id>', 'push configurations'
-    def push(id)
+    def push(_id)
       CLI::Push.new.run
     end
   end

@@ -14,7 +14,7 @@ module Rbdash
       end
 
       def save
-        id = @body["id"]
+        id = @body['id']
         dirname = self.class.dirname
         Dir.mkdir(dirname) unless File.exist?(dirname)
         filename = "#{dirname}/query-#{id}.json"
@@ -33,7 +33,7 @@ module Rbdash
           response = client.get("#{endpoint}/#{id}")
           if response.code != 200
             puts response.code
-            raise StandardError.new('abort!')
+            raise StandardError, 'abort!'
           end
           h = JSON.parse(response.body)
           body = h.select { |k, _| attributes.map(&:to_s).include?(k) }
@@ -41,10 +41,10 @@ module Rbdash
         end
 
         def find_all
-          response = client.get("#{endpoint}")
+          response = client.get(endpoint.to_s)
           if response.code != 200
             puts response.code
-            raise StandardError.new('abort!')
+            raise StandardError, 'abort!'
           end
           h = JSON.parse(response.body)
           results = h['results']
@@ -55,11 +55,11 @@ module Rbdash
         end
 
         def update(id)
-          request_body = self.load(id).body
+          request_body = load(id).body
           response = client.post("#{endpoint}/#{id}", body: request_body)
           if response.code != 200
             puts response.code
-            raise StandardError.new('abort!')
+            raise StandardError, 'abort!'
           end
           response
         end

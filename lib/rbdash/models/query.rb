@@ -3,7 +3,6 @@ require_relative 'base_model'
 module Rbdash
   module Models
     class Query < BaseModel
-
       def self.attributes
         [
           :id,             # number
