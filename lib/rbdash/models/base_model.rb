@@ -68,6 +68,8 @@ module Rbdash
           response = client.post("#{endpoint}/#{id}", body: request_body)
           if response.code != 200
             puts response.code
+            puts response.headers
+            puts response.body
             raise StandardError, 'abort!'
           end
           response
