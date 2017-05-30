@@ -1,3 +1,5 @@
+require_relative 'request'
+
 module Redash
   class Query
     DIRNAME = 'queries'.freeze
@@ -13,6 +15,27 @@ module Redash
       # do something
     end
 
+    def self.find_all
+      response = Redash::Request.new.get('/api/queries')
+      if response.code != 200
+        puts "something went wrong."
+        return
+      end
+      response
+    end
+
+    def self.update(id)
+      request_body = self.load(id).to_h
+      response = Redash::Request.new.post("/api/queries/#{id}", request_body)
+      if response.code != 200
+        puts "something went wrong."
+        puts response.code
+        puts response.headers
+        return
+      end
+      response
+    end
+
     def self.parse_response(result)
       q = new
       q.id = result['id']
@@ -26,15 +49,18 @@ module Redash
     end
 
     def to_json
-      h = {
-        id: id,
-        data_source_id: data_source_id,
-        query: query,
-        name: name,
-        description: description,
-        options: options
+      JSON.pretty_generate(to_h)
+    end
+
+    def to_h
+      {
+        'id': id,
+        'data_source_id': data_source_id,
+        'query': query,
+        'name': name,
+        'description': description,
+        'options': options
       }
-      JSON.pretty_generate(h)
     end
 
     def save
@@ -48,8 +74,7 @@ module Redash
     def self.load(id)
       file = Dir.glob("#{DIRNAME}/query-#{id}.json").first
       raise StandardError, 'id not found' unless file
-      JSON.parse(File.read(file))
-      # parse_response(json)
+      parse_response(JSON.parse(File.read(file)))
     end
   end
 end
