@@ -1,5 +1,5 @@
 module Rbdash
-  class CLI::Init
+  class CLI::Pull
 
   end
 end

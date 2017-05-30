@@ -5,14 +5,19 @@ module Rbdash
     include Thor::Actions
     class_option 'dry-run'
 
+    desc 'init', 'pulls existing configurations.'
+    def init
+      CLI::Init.new.run
+    end
+
     desc 'pull', 'pulls existing configurations.'
     def pull
-      puts 'pull.'
+      CLI::Pull.new.run
     end
 
     desc 'push <id>', 'push configurations'
     def push(id)
-      puts 'push.'
+      CLI::Push.new.run
     end
   end
 end
