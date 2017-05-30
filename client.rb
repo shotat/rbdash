@@ -12,7 +12,7 @@ module Redash
       @uri = uri
       @options = {
         verify: false,
-        headers: {'Authorization': token }
+        headers: {'Authorization'=> token }
       }
     end
 
@@ -30,8 +30,10 @@ module Redash
     end
 
     def update_query(id)
-      response = self.class.get('/api/queries', @options)
-      JSON.parse(response.body)
+      request_body = Query.load(id)
+      response = self.class.post("/api/queries/#{id}", @options.merge(query: request_body))
+      puts JSON.parse(response.body)
+      # puts request_body.to_json
     end
   end
 end
@@ -40,4 +42,5 @@ config = YAML.load_file('./config.yml')
 base_uri = config['base_uri']
 token = config['token']
 client = Redash::Client.new(base_uri, token)
-client.queries
+# client.queries
+client.update_query(28)

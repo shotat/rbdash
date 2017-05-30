@@ -1,5 +1,7 @@
 module Redash
   class Query
+    DIRNAME = 'queries'.freeze
+
     attr_accessor :id,             # number
                   :data_source_id, # number
                   :query,          # string
@@ -36,12 +38,18 @@ module Redash
     end
 
     def save
-      dirname = 'queries'
-      Dir.mkdir(dirname) unless File.exists?(dirname)
-      filename = "#{dirname}/query-#{data_source_id}-#{id}.json"
+      Dir.mkdir(DIRNAME) unless File.exist?(DIRNAME)
+      filename = "#{DIRNAME}/query-#{id}.json"
       File.open(filename, 'w+') do |f|
         f.puts(to_json)
       end
+    end
+
+    def self.load(id)
+      file = Dir.glob("#{DIRNAME}/query-#{id}.json").first
+      raise StandardError, 'id not found' unless file
+      JSON.parse(File.read(file))
+      # parse_response(json)
     end
   end
 end
