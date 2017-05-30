@@ -1,10 +1,9 @@
-NOTE: work in progress. :construction_worker:
 
 # Rbdash
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/rbdash`. To experiment with that code, run `bin/console` for an interactive prompt.
+Rbdash is a configuration management CLI tool for re:dash.
 
-TODO: Delete this and the text above, and describe your gem
+NOTE: work in progress. :construction_worker:
 
 ## Installation
 
@@ -24,7 +23,30 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+
+#### setup
+
+```sh
+$ rbdash init
+      create  config_test.yml
+Type your redash server uri: https://example.redash.com
+Type your redash API token: xxxxxxxxxxxxxxxx
+```
+
+#### fetch remote configurations
+
+```sh
+$ rbdash pull
+#   create queries/query-1.json
+#   create queries/query-2.json
+#   ...
+```
+
+#### push configs to remote
+
+```
+$ rbdash push <id>
+```
 
 ## Development
 
@@ -34,4 +56,4 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/rbdash.
+Bug reports and pull requests are welcome on GitHub at https://github.com/shotat/rbdash.
