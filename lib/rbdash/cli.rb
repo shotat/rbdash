@@ -6,7 +6,7 @@ module Rbdash
 
     desc 'init', 'create a configuration file.'
     def init
-      create_file 'config.yml' do
+      create_file '.rbdash.yml' do
         base_uri = ask('Type your redash server uri:')
         token = ask('Type your redash API token:')
         "base_uri: #{base_uri}\ntoken: #{token}"
