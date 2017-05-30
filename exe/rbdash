@@ -1,0 +1,4 @@
+#!/usr/bin/env ruby
+
+require 'rbdash'
+Rbdash::CLI.start(ARGV)
