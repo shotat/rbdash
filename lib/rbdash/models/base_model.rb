@@ -50,10 +50,11 @@ module Rbdash
             end
             h = JSON.parse(response.body)
             results = h['results']
-            all_results += results.map do |result|
+            all_results += results.reduce([]) do |acc, result|
+              next acc if result['is_archived'] || result['is_draft']
               body = result.select { |k, _| attributes.map(&:to_s).include?(k) }
               id = result['id']
-              new(body, id)
+              acc << new(body, id)
             end
 
             count = h['count']

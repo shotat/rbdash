@@ -19,6 +19,11 @@ module Rbdash
     method_option OPT_DRY_RUN
     method_option OPT_ALL
     def pull(*ids)
+      unless Utils.config_exist?
+        puts 'Cannot locate .rbdash.yml in the current directory.'
+        return
+      end
+
       if all? && !ids.empty?
         puts "'CONFLICT: Cannot assign ids with --#{OPT_ALL} option.'"
         return
@@ -35,6 +40,11 @@ module Rbdash
     method_option OPT_DRY_RUN
     method_option OPT_ALL
     def push(*ids)
+      unless Utils.config_exist?
+        puts 'Cannot locate .rbdash.yml in the current directory.'
+        return
+      end
+
       if all? && !ids.empty?
         puts "'CONFLICT: Cannot assign ids with --#{OPT_ALL} option.'"
         return

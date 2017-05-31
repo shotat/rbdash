@@ -10,6 +10,10 @@ module Rbdash
       def find_local_file(id)
         Dir.glob("queries/query-#{id}.json").first
       end
+
+      def config_exist?
+        !Dir.glob('.rbdash.yml').empty?
+      end
     end
   end
 end
