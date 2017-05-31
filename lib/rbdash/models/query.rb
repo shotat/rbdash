@@ -5,7 +5,6 @@ module Rbdash
     class Query < BaseModel
       def self.attributes
         [
-          :id,             # number
           :data_source_id, # number
           :query,          # string
           :name,           # string

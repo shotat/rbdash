@@ -22,10 +22,14 @@ module Rbdash
     private
 
     def show_diff(query)
-      id = query.body['id']
+      id = query.id
       local_state = Rbdash::Models::Query.load(id)
       diff = Diffy::Diff.new(local_state.to_json, query.to_json, diff_opt).to_s(:color)
-      puts diff unless diff.chomp.empty?
+
+      unless diff.chomp.empty?
+        puts "[changed] #{id}"
+        puts diff
+      end
     end
 
     def diff_opt

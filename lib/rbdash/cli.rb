@@ -15,7 +15,7 @@ module Rbdash
       end
     end
 
-    desc 'pull', 'pulls existing configurations.'
+    desc 'pull <id1> <id2> ... [options]', 'pulls existing remote configurations.'
     method_option OPT_DRY_RUN
     method_option OPT_ALL
     def pull(*ids)
@@ -23,15 +23,24 @@ module Rbdash
         puts "'CONFLICT: Cannot assign ids with --#{OPT_ALL} option.'"
         return
       end
+      if !all? && ids.empty?
+        puts "'You may pass either ids or --#{OPT_ALL} option.'"
+        return
+      end
+
       CLI::Pull.new.run(*ids, command_options)
     end
 
-    desc 'push <id1> <id2> ...', 'push configurations'
+    desc 'push <id1> <id2> ... [options]', 'push local configurations to remote.'
     method_option OPT_DRY_RUN
     method_option OPT_ALL
     def push(*ids)
       if all? && !ids.empty?
         puts "'CONFLICT: Cannot assign ids with --#{OPT_ALL} option.'"
+        return
+      end
+      if !all? && ids.empty?
+        puts "'You may pass either ids or --#{OPT_ALL} option.'"
         return
       end
 

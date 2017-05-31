@@ -3,10 +3,11 @@ require_relative '../request'
 module Rbdash
   module Models
     class BaseModel
-      attr_accessor :body
+      attr_accessor :body, :id
 
-      def initialize(body)
+      def initialize(body, id)
         @body = body
+        @id = id
       end
 
       def to_json
@@ -14,7 +15,6 @@ module Rbdash
       end
 
       def save
-        id = @body['id']
         dirname = self.class.dirname
         Dir.mkdir(dirname) unless File.exist?(dirname)
         filename = "#{dirname}/query-#{id}.json"
@@ -37,7 +37,7 @@ module Rbdash
           end
           h = JSON.parse(response.body)
           body = h.select { |k, _| attributes.map(&:to_s).include?(k) }
-          new(body)
+          new(body, id)
         end
 
         def find_all
@@ -52,7 +52,8 @@ module Rbdash
             results = h['results']
             all_results += results.map do |result|
               body = result.select { |k, _| attributes.map(&:to_s).include?(k) }
-              new(body)
+              id = result['id']
+              new(body, id)
             end
 
             count = h['count']
@@ -76,10 +77,10 @@ module Rbdash
         end
 
         def load(id)
-          file = Dir.glob("#{dirname}/query-#{id}.json").first
-          raise StandardError, 'id not found' unless file
+          file = Utils.find_local_file(id)
+          return new(nil, id) unless file
           body = JSON.parse(File.read(file))
-          new(body)
+          new(body, id)
         end
       end
     end
