@@ -9,7 +9,7 @@
 /tmp/
 
 queries
-config.yml
+.rbdash.yml
 
 # rspec failure tracking
 .rspec_status

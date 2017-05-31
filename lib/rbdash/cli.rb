@@ -19,10 +19,14 @@ module Rbdash
       CLI::Pull.new.run
     end
 
-    desc 'push <id>', 'push configurations'
+    desc 'push <id1> <id2> ...', 'push configurations'
     method_option 'dry-run'
-    def push(id)
-      CLI::Push.new.run(id)
+    def push(*ids)
+      if options['dry-run']
+        CLI::Push.new.dry_run(*ids)
+        return
+      end
+      CLI::Push.new.run(*ids)
     end
 
     desc 'push_all', 'push all configurations'
