@@ -1,3 +1,4 @@
+[![Gem Version](https://badge.fury.io/rb/rbdash.svg)](https://badge.fury.io/rb/rbdash)
 
 # Rbdash
 
