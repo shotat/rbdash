@@ -42,8 +42,18 @@ $ rbdash pull <id> <id> ... [--dry-run] [--all]
 
 #### push configs to remote
 
-```
+```sh
 $ rbdash push <id> <id> ... [--dry-run] [--all]
+```
+
+```diff
+@@ -9,5 +9,5 @@
+         "type": "text",
+         "name": "DateTime(YYYYMMDD)",
+-        "value": "20170530",
++        "value": "20170531",
+         "title": "DateTime(YYYYMMDD)"
+       },
 ```
 
 ## Development
