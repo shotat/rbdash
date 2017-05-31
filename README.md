@@ -3,8 +3,6 @@
 
 Rbdash is a configuration management CLI tool for [Redash](https://redash.io/).
 
-NOTE: work in progress. :construction_worker:
-
 ## Installation
 
 Add this line to your application's Gemfile:
@@ -36,7 +34,7 @@ Type your redash API token: xxxxxxxxxxxxxxxx
 #### fetch remote configurations
 
 ```sh
-$ rbdash pull
+$ rbdash pull <id> <id> ... [--dry-run] [--all]
 #   create queries/query-1.json
 #   create queries/query-2.json
 #   ...
@@ -45,7 +43,7 @@ $ rbdash pull
 #### push configs to remote
 
 ```
-$ rbdash push <id>
+$ rbdash push <id> <id> ... [--dry-run] [--all]
 ```
 
 ## Development
